@@ -1,0 +1,13 @@
+# Personal materials — don't commit to public repo
+GenericDrafts/
+Samples/
+*.pdf
+
+# Output files
+job_tracker_*.xlsx
+job_tracker_*.csv
+
+# Python
+__pycache__/
+*.pyc
+.venv/

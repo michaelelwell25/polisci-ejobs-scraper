@@ -1,0 +1,93 @@
+# ── Job Market Scraper: Profile Configuration ──
+# Customize this file with YOUR research profile and preferences.
+# The scraper uses these settings to filter and score job listings.
+
+# Your research keywords — listings matching these get higher scores.
+# Add terms relevant to your subfield, methods, and research agenda.
+research_keywords:
+  - race
+  - racial
+  - ethnicity
+  - ethnic
+  - identity
+  - identities
+  - lgbtq
+  - lgbt
+  - queer
+  - sexual orientation
+  - gender identity
+  - linked fate
+  - group consciousness
+  - solidarity
+  - political behavior
+  - political psychology
+  - public opinion
+  - voting behavior
+  - political attitudes
+  - political participation
+  - inequality
+  - marginalized
+  - minority politics
+  - minority
+  - intersectionality
+  - discrimination
+  - prejudice
+  - representation
+  - descriptive representation
+  - survey
+  - quantitative
+  - experimental
+  - causal inference
+
+# Subfields you'd consider applying to (matched against listing categories)
+subfield_match:
+  - american politics
+  - american government
+  - methodology
+  - open field
+  - open
+  - political behavior
+  - political psychology
+  - public opinion
+
+# Which rank/position types to include, and their tier
+# Priority = TT positions you'd apply to first
+# Lower Priority = worth tracking, apply if time/fit
+rank_tiers:
+  priority:
+    - "tt: assistant"
+    - "tt: open rank"
+    - "tt: assistant/associate"
+    - "assistant professor"
+    - "open rank"
+    - "tenure-track"
+    - "tenure track"
+    - "tenure-stream"
+  lower_priority:
+    - "visiting"
+    - "vap"
+    - "ntt: visiting"
+  exclude:
+    - "dean"
+    - "director"
+    - "executive"
+    - "chair"
+    - "endowed"
+    - "postdoc"
+    - "post-doc"
+    - "research associate"
+    - "lecturer"
+    - "instructor"
+    - "ntt: lecturer"
+    - "ntt: teaching"
+    - "professor of practice"
+
+# Location filters
+locations:
+  # Set to true to include international positions
+  international: false
+  # Allowed countries (besides US, which is always included)
+  allowed_countries:
+    - canada
+  # Exclude community colleges?
+  exclude_community_colleges: true
