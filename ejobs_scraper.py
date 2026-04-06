@@ -58,6 +58,8 @@ SUBFIELD_MATCH = [
     "public opinion",
 ]
 
+SUBFIELD_EXCLUDE = []
+
 CC_PATTERNS = [
     r"community college", r"community & technical",
     r"\bcc\b", r"two-year",
@@ -84,8 +86,8 @@ ALLOW_INTERNATIONAL = False
 
 def load_config(config_path: str | None):
     """Load profile_config.yaml and override globals."""
-    global RESEARCH_KEYWORDS, SUBFIELD_MATCH, RANK_TT_PRIORITY, RANK_VAP
-    global RANK_EXCLUDE, ALLOWED_COUNTRIES, EXCLUDE_CC, ALLOW_INTERNATIONAL
+    global RESEARCH_KEYWORDS, SUBFIELD_MATCH, SUBFIELD_EXCLUDE, RANK_TT_PRIORITY
+    global RANK_VAP, RANK_EXCLUDE, ALLOWED_COUNTRIES, EXCLUDE_CC, ALLOW_INTERNATIONAL
 
     if config_path is None:
         # Try default location next to script
@@ -109,6 +111,8 @@ def load_config(config_path: str | None):
         RESEARCH_KEYWORDS = [kw.lower() for kw in cfg["research_keywords"]]
     if "subfield_match" in cfg:
         SUBFIELD_MATCH = [s.lower() for s in cfg["subfield_match"]]
+    if "subfield_exclude" in cfg:
+        SUBFIELD_EXCLUDE = [s.lower() for s in cfg["subfield_exclude"]]
     if "rank_tiers" in cfg:
         rt = cfg["rank_tiers"]
         if "priority" in rt:
@@ -466,6 +470,8 @@ def _score_keywords(job: Job) -> tuple[int, list[str]]:
 
 def _matches_subfield(job: Job) -> bool:
     blob = f"{job.subfield} {job.specialization}".lower()
+    if SUBFIELD_EXCLUDE and any(sf in blob for sf in SUBFIELD_EXCLUDE):
+        return False
     return any(sf in blob for sf in SUBFIELD_MATCH)
 
 def filter_and_score(jobs: list[Job]) -> list[Job]:

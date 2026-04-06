@@ -50,6 +50,12 @@ subfield_match:
   - political psychology
   - public opinion
 
+# Subfields to always exclude, even if they also match above
+subfield_exclude:
+  - public law
+  - public policy
+  - public administration
+
 # Which rank/position types to include, and their tier
 # Priority = TT positions you'd apply to first
 # Lower Priority = worth tracking, apply if time/fit
