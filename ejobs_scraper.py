@@ -464,6 +464,10 @@ def _score_keywords(job: Job) -> tuple[int, list[str]]:
             matched.append(kw)
     return len(matched), matched
 
+def _matches_subfield(job: Job) -> bool:
+    blob = f"{job.subfield} {job.specialization}".lower()
+    return any(sf in blob for sf in SUBFIELD_MATCH)
+
 def filter_and_score(jobs: list[Job]) -> list[Job]:
     kept = []
     for j in jobs:
@@ -475,6 +479,9 @@ def filter_and_score(jobs: list[Job]) -> list[Job]:
         if tier == "Excluded":
             continue
         score, kws = _score_keywords(j)
+        # Filter by subfield — but let keyword-matched listings through
+        if not _matches_subfield(j) and score == 0:
+            continue
         j.tier = tier
         j.match_score = score
         j.match_keywords = ", ".join(kws)
